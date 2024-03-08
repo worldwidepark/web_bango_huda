@@ -1,0 +1,2 @@
+module BangoHudaHelper
+end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bango_huda/index'
   get 'google_login_api/callback'
   get 'static_pages/before_login'
   get 'static_pages/after_login'

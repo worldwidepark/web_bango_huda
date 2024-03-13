@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  get 'bango_huda/index'
+  scope '/admin' do
+    resources :bango_hudas, only: :index
+  end
+  resources :users do
+    resources :bango_hudas, shallow: true, except: :index
+  end
+
   get 'google_login_api/callback'
   get 'static_pages/before_login'
   get 'static_pages/after_login'

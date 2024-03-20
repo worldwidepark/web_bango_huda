@@ -1,0 +1,7 @@
+
+待ってる人:<%=@waiting_people_count%>
+<%= form_with url: "/users/#{params[:user_id]}/bango_hudas", method: :post do |form| %>
+  <%# ボタンにしたいね %>
+  <%= form.submit "生成" %>
+
+<% end %>

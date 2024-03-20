@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :bango_hudas, only: :index
   end
   resources :users do
-    resources :bango_hudas, shallow: true, except: :index
+    resources :bango_hudas, except: :index
   end
 
   get 'google_login_api/callback'

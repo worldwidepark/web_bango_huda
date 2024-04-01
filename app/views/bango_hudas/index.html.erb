@@ -1,4 +1,7 @@
 <h1>BangoHuda#index</h1>
-<p>Find me in app/views/bango_huda/index.html.erb</p>
 
-<%=@current_user%>
+<%# <%=@current_user.name%>
+<% @alive_bango_hudas.each do |huda| %>
+  <%# button 追加 %>
+  <p><%= huda.bango %></p>
+<% end %>

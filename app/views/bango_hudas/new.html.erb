@@ -1,7 +1,5 @@
 
 待ってる人:<%=@waiting_people_count%>
-<%= form_with url: "/users/#{params[:user_id]}/bango_hudas", method: :post do |form| %>
-  <%# ボタンにしたいね %>
-  <%= form.submit "生成" %>
-
+<%= form_with url: "/users/#{params[:user_uuid]}/bango_hudas", method: :post do |form| %>
+  <%= form.submit "生成", class: "cursor-pointer bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700" %>
 <% end %>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :bango_hudas, only: :index
   end
-  resources :users do
+  resources :users, param: :uuid do
     resources :bango_hudas, except: :index
   end
 

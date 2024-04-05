@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   scope '/admin' do
-    resources :bango_hudas, only: :index
+    resources :bango_hudas, only: [:index] do
+      member do
+        patch 'done'
+        patch 'cancel'
+        patch 'no_show'
+      end
+      collection do
+        patch 'reset'
+      end
+    end
   end
+
   resources :users, param: :uuid do
     resources :bango_hudas, except: :index
   end

@@ -1,9 +1,8 @@
 class BangoHudasController < ApplicationController
   # todo: login確認
-  # todo: reset buttonを作る
 
   before_action :authenticate_user,  only: [:index]
-
+  before_action :find_bango_huda, only: [:no_show, :done, :cancel]
 
   def index
     # adminと一般用を分ける。
@@ -25,52 +24,53 @@ class BangoHudasController < ApplicationController
   def create
     current_user = User.find_by(uuid: params[:user_uuid])
     new_bango_huda = current_user.bango_hudas.new(bango: set_bango(current_user))
-    #作成後、表示(show)
-    # render "new"
     if new_bango_huda.save
+      flash[:notice] = "番号札作成完了"
       redirect_to user_bango_huda_path(user_uuid: new_bango_huda.user.uuid, id: new_bango_huda.id)
     else
-      render new_user_bango_huda_path # fail文も
-    # give bango_hudas Id to show
+      # 店の名前入れてあげると新設かも
+      # ~店のstaffまで問い合わせしてください。みたいな
+      flash.now[:alert] = "番号札作成に失敗しました。"
+      render new_user_bango_huda_path
     end
   end
 
   def show
     @bango_huda = BangoHuda.find(params[:id])
     current_user = User.find_by(uuid: params[:user_uuid])
-    @waiting_people_count = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).size
+    @waiting_people_count = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).size
   end
 
   def delete
   end
 
   def no_show
-    @bango_huda = BangoHuda.find(params[:id])
-    if @bango_huda
-      @bango_huda.update(is_no_show: true)
+    # if  @bango_huda.update(is_no_show: true)
+      flash[:notice] = "成功：no_show"
       redirect_to bango_hudas_path
     else
-      render bango_hudas_path
+      flash[:alert] = "失敗：no_show"
+      redirect_to bango_hudas_path
     end
   end
 
   def cancel
-    @bango_huda = BangoHuda.find(params[:id])
-    if @bango_huda
-      @bango_huda.update(is_canceled: true)
+    if @bango_huda.update(is_canceled: true)
+      flash[:notice] = "成功：キャンセル"
       redirect_to bango_hudas_path
     else
-      render bango_hudas_path
+      flash[:alert] = "失敗：キャンセル"
+      redirect_to bango_hudas_path
     end
   end
 
   def done
-    @bango_huda = BangoHuda.find(params[:id])
-    if @bango_huda
-      @bango_huda.update(is_showed: true)
+    if @bango_huda.update(is_showed: true)
+      flash[:notice] = "成功：案内済み"
       redirect_to bango_hudas_path
     else
-      render bango_hudas_path
+      flash[:alert] = "失敗：案内済み"
+      redirect_to bango_hudas_path
     end
   end
 
@@ -89,6 +89,14 @@ class BangoHudasController < ApplicationController
   def set_bango(user)
     last_number = user.bango_hudas.where.not(is_reseted: true).maximum(:bango) || 0
     last_number + 1
+  end
+
+  def find_bango_huda
+    @bango_huda = BangoHuda.find(params[:id])
+    unless @bango_huda
+      flash[:alert] = "失敗：指定した番号札にエラーが発生しました。"
+      redirect_to bango_hudas_path
+    end
   end
 end
 

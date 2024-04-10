@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def show
+    @current_user = current_user
   end
 
   def edit
@@ -9,8 +10,9 @@ class UsersController < ApplicationController
 
   def update
     @current_user = current_user
+    binding.break
     if @current_user.update(user_params)
-      redirect_to @user, notice: '成功: User情報アップデート'
+      redirect_to user_path, notice: '成功: User情報アップデート'
     else
       render :edit
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_141355) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_143221) do
   create_table "bango_hudas", force: :cascade do |t|
     t.integer "bango", null: false
     t.boolean "is_no_show", default: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_141355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uuid"
+    t.string "store_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end

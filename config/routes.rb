@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+
+
   scope '/admin' do
     resources :bango_hudas, only: [:index] do
       member do
@@ -10,7 +13,7 @@ Rails.application.routes.draw do
         patch 'reset'
       end
     end
-    resources :users, only:[:edit, :show, :update]
+    resource :user, only: [:edit, :update, :show]
   end
 
   resources :users, param: :uuid do

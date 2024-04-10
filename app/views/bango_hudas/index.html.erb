@@ -1,14 +1,12 @@
 <h1>BangoHuda#index</h1>
 
-<%# <%=@current_user.name%>
 <% if @alive_bango_hudas.present? %>
   <% @alive_bango_hudas.each do |huda| %>
-    <%# button 追加 %>
-    <p><%= huda.bango %>
-    <%= button_to 'きた', done_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %>
-    <%= button_to 'こない', no_show_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %>
-    <%= button_to 'キャンセル', cancel_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %>
-  </p>
+    <p class="mb-4 text-lg"><%= huda.bango %>
+      <%= button_to '案内済み', done_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
+      <%= button_to '不在', no_show_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
+      <%= button_to 'キャンセル', cancel_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
+    </p>
   <% end %>
 <% end %>
 
@@ -24,17 +22,7 @@
   <% end %>
 <% end %>
 
-<% if @no_show_bango_hudas.present? %>
-  <% @no_show_bango_hudas.each do |huda| %>
 
-    <p><%= huda.bango %>
-    <%= button_to '最後に戻す', cancel_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %>
-    <%= button_to '最初に戻す', cancel_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %>
-    <%= button_to '〜の後ろに戻す', cancel_bango_huda_path(huda), method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %> </p>
-  <% end %>
-<% end %>
-<%# 여기서 뭐  @alive_bango_hudas같은거 전해줄수없나?  %>
-<%# <%= button_to 'reset', reset_bango_hudas_path, method: :patch, form: {class: "some-class"}, class: "btn btn-danger" %> </p>
-<%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "btn btn-danger" %>
+<%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 md:py-3 md:px-6 md:text-lg" %>
 
-<%= qrcode %>
+<%# <%= qrcode %>

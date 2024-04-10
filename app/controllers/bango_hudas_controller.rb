@@ -46,10 +46,10 @@ class BangoHudasController < ApplicationController
 
   def no_show
     if  @bango_huda.update(is_no_show: true)
-      flash[:notice] = "成功：no_show"
+      flash[:notice] = "成功：不在"
       redirect_to bango_hudas_path
     else
-      flash[:alert] = "失敗：no_show"
+      flash[:alert] = "失敗：不在"
       redirect_to bango_hudas_path
     end
   end

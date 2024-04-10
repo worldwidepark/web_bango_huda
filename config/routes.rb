@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         patch 'reset'
       end
     end
+    resources :users, only:[:edit, :show, :update]
   end
 
   resources :users, param: :uuid do

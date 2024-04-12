@@ -1,3 +1,5 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
 <%= @current_user.store_name%>
+<%= button_to 'ユーザー情報修正', edit_user_path, method: :get, class: 'btn btn-primary' %>
+<%= button_to '番号札管理', bango_hudas_path, method: :get, class: 'btn btn-primary' %>
+

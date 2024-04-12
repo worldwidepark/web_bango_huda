@@ -6,6 +6,12 @@ class BangoHudasController < ApplicationController
 
   def index
     # adminと一般用を分ける。
+    # store_nameがないと番号札の管理ができない
+    if current_user.store_name.blank?
+      flash[:alert] = "店名を入力してください"
+      redirect_to edit_user_path
+    end
+
     @current_user = current_user
     @alive_bango_hudas = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false)
     @done_bango_hudas = current_user.bango_hudas.where(is_showed: true).where(is_reseted: false)

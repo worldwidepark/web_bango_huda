@@ -1,2 +1,7 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="px-4 sm:px-6 lg:px-8 py-2">
+  <%= form_with scope: :user, url: "/admin/user", method: :put, local: true do |form| %>
+    <%= form.label :store_name, 'Store Name', class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :store_name, class: "block w-full text-gray-700 border rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:shadow-outline" %>
+    <%= form.submit "生成", class: "cursor-pointer bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 text-sm sm:text-base" %>
+  <% end %>
+</div>

@@ -24,6 +24,7 @@ class BangoHudasController < ApplicationController
 
   def new
     current_user = User.find_by(uuid: params[:user_uuid])
+    @store_name = current_user.store_name
     @waiting_people_count = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).size
   end
 

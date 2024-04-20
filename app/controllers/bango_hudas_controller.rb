@@ -24,6 +24,7 @@ class BangoHudasController < ApplicationController
 
   def new
     current_user = User.find_by(uuid: params[:user_uuid])
+    @store_name = current_user.store_name
     @waiting_people_count = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).size
   end
 
@@ -44,7 +45,8 @@ class BangoHudasController < ApplicationController
   def show
     @bango_huda = BangoHuda.find(params[:id])
     current_user = User.find_by(uuid: params[:user_uuid])
-    @waiting_people_count = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).size
+    @ordered_bango = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).order(bango: :asc).pluck(:bango)
+    @waiting_count = @ordered_bango.index(@bango_huda.bango) + 1
   end
 
   def delete

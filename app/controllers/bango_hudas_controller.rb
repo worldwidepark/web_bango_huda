@@ -46,7 +46,7 @@ class BangoHudasController < ApplicationController
     @bango_huda = BangoHuda.find(params[:id])
     current_user = User.find_by(uuid: params[:user_uuid])
     @ordered_bango = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).order(bango: :asc).pluck(:bango)
-    @waiting_count = @ordered_bango.index(@bango_huda.bango) + 1
+    @waiting_count = @ordered_bango.index(@bango_huda.bango)
   end
 
   def delete

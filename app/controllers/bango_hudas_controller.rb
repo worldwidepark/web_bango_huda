@@ -13,10 +13,12 @@ class BangoHudasController < ApplicationController
     end
 
     @current_user = current_user
-    @alive_bango_hudas = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false)
-    @done_bango_hudas = current_user.bango_hudas.where(is_showed: true).where(is_reseted: false)
-    @canceled_bango_hudas = current_user.bango_hudas.where(is_canceled: true).where(is_reseted: false)
-    @no_show_bango_hudas = current_user.bango_hudas.where(is_no_show: true).where(is_reseted: false)
+    bangohudas = @current_user.bango_hudas.where(is_reseted: false)
+    @alive_bango_hudas = bangohudas.select { |bango_huda| bango_huda.is_showed == false && bango_huda.is_canceled == false && bango_huda.is_no_show == false }
+    @done_bango_hudas = bangohudas.select { |bango_huda| bango_huda.is_showed == true }
+    @no_show_bango_hudas = bangohudas.select { |bango_huda| bango_huda.is_no_show == true }
+    @canceled_bango_hudas = bangohudas.select { |bango_huda| bango_huda.is_canceled == true }
+
     # @alive_bango_hudas = Rails.cache.fetch("alive_bango_hudas", expires_in: 12.hours) do
     #   current_user.bango_hudas.where(is_showed: false, is_canceled: true, is_no_show: true)
     # end

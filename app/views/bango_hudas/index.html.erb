@@ -1,28 +1,40 @@
-<h1>BangoHuda#index</h1>
-
-<% if @alive_bango_hudas.present? %>
-  <% @alive_bango_hudas.each do |huda| %>
-    <p class="mb-4 text-lg"><%= huda.bango %>
-      <%= button_to '案内済み', done_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
-      <%= button_to '不在', no_show_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
-      <%= button_to 'キャンセル', cancel_bango_huda_path(huda), method: :patch, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700" %>
-    </p>
+<div class="max-w-2xl mx-auto p-4">
+  <% if @alive_bango_hudas.present? %>
+    <h2 class="text-2xl font-bold mt-6 mb-4">待機中</h2>
+    <% @alive_bango_hudas.each do |huda| %>
+      <div class="flex items-center justify-between bg-white p-3 rounded-lg shadow mb-3">
+        <span class="text-lg font-semibold"><%= huda.bango %> 番</span>
+        <div class="flex space-x-2">
+          <%= button_to '案内済み', done_bango_huda_path(huda), method: :patch, class: "bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors duration-200" %>
+          <%= button_to '不在', no_show_bango_huda_path(huda), method: :patch, class: "bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700 transition-colors duration-200" %>
+          <%= button_to 'キャンセル', cancel_bango_huda_path(huda), method: :patch, class: "bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 transition-colors duration-200" %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @done_bango_hudas.present? %>
-  <% @done_bango_hudas.each do |huda| %>
-    <p><%= huda.bango %></p>
+  <% if @done_bango_hudas.present? %>
+    <h2 class="text-2xl font-bold mt-6 mb-4">案内済み</h2>
+    <% @done_bango_hudas.each do |huda| %>
+      <div class="bg-green-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @canceled_bango_hudas.present? %>
-  <% @canceled_bango_hudas.each do |huda| %>
-    <p><%= huda.bango %></p>
+  <% if @no_show_bango_hudas.present? %>
+    <h2 class="text-2xl font-bold mt-6 mb-4">不在</h2>
+    <% @no_show_bango_hudas.each do |huda| %>
+      <div class="bg-yellow-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+    <% end %>
   <% end %>
-<% end %>
 
+  <% if @canceled_bango_hudas.present? %>
+    <h2 class="text-2xl font-bold mt-6 mb-4">キャンセル</h2>
+    <% @canceled_bango_hudas.each do |huda| %>
+      <div class="bg-gray-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+    <% end %>
+  <% end %>
 
-<%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 md:py-3 md:px-6 md:text-lg" %>
-
-<%# <%= qrcode %>
+  <div class="text-center my-16">
+    <%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "bg-blue-300 w-full text-white py-2 px-4 rounded hover:bg-blue-700 md:py-3 md:px-6 md:text-lg transition-colors duration-200" %>
+  </div>
+</div>

@@ -34,7 +34,11 @@
     <% end %>
   <% end %>
 
-  <div class="text-center my-16">
-    <%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "bg-blue-300 w-full text-white py-2 px-4 rounded hover:bg-blue-700 md:py-3 md:px-6 md:text-lg transition-colors duration-200" %>
+  <div class="text-center mt-4">
+    <%= button_to 'ユーザー情報に戻る', user_path, method: :get, class: "bg-blue-300 w-full text-white py-2 px-4 rounded hover:bg-blue-700 md:py-3 md:px-6 md:text-lg transition-colors duration-200" %>
+  </div>
+
+  <div class="text-center my-8">
+    <%= button_to 'Reset', reset_bango_hudas_path, method: :patch, form: { data: { turbo_confirm: "確認" } }, class: "bg-red-300 w-full text-white py-2 px-4 rounded hover:bg-red-700 md:py-3 md:px-6 md:text-lg transition-colors duration-200" %>
   </div>
 </div>

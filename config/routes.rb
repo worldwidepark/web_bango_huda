@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, param: :uuid do
-    resources :bango_hudas, except: :index
+    resources :bango_hudas, except: [:index],:param => :uuid
   end
 
   get 'google_login_api/callback'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_143221) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_121151) do
   create_table "bango_hudas", force: :cascade do |t|
     t.integer "bango", null: false
     t.boolean "is_no_show", default: false
@@ -21,7 +21,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_143221) do
     t.datetime "updated_at", null: false
     t.boolean "is_showed", default: false
     t.boolean "is_reseted", default: false
+    t.string "uuid"
     t.index ["user_id"], name: "index_bango_hudas_on_user_id"
+    t.index ["uuid"], name: "index_bango_hudas_on_uuid", unique: true
   end
 
   create_table "users", force: :cascade do |t|

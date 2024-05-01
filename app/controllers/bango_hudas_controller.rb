@@ -35,7 +35,7 @@ class BangoHudasController < ApplicationController
     new_bango_huda = current_user.bango_hudas.new(bango: set_bango(current_user))
     if new_bango_huda.save
       flash[:notice] = "番号札作成完了"
-      redirect_to user_bango_huda_path(user_uuid: new_bango_huda.user.uuid, id: new_bango_huda.id)
+      redirect_to user_bango_huda_path(user_uuid: new_bango_huda.user.uuid, uuid: new_bango_huda.uuid)
     else
       # 店の名前入れてあげると新設かも
       # ~店のstaffまで問い合わせしてください。みたいな
@@ -45,7 +45,7 @@ class BangoHudasController < ApplicationController
   end
 
   def show
-    @bango_huda = BangoHuda.find(params[:id])
+    @bango_huda = BangoHuda.find_by(uuid: params[:uuid])
     current_user = User.find_by(uuid: params[:user_uuid])
     @ordered_bango = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false).order(bango: :asc).pluck(:bango)
     @waiting_count = @ordered_bango.index(@bango_huda.bango)

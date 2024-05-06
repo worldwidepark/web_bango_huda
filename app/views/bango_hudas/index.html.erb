@@ -16,21 +16,21 @@
   <% if @done_bango_hudas.present? %>
     <h2 class="text-2xl font-bold mt-6 mb-4">案内済み</h2>
     <% @done_bango_hudas.each do |huda| %>
-      <div class="bg-green-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+      <div class="bg-green-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %>番</div>
     <% end %>
   <% end %>
 
   <% if @no_show_bango_hudas.present? %>
     <h2 class="text-2xl font-bold mt-6 mb-4">不在</h2>
     <% @no_show_bango_hudas.each do |huda| %>
-      <div class="bg-yellow-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+      <div class="bg-yellow-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %>番</div>
     <% end %>
   <% end %>
 
   <% if @canceled_bango_hudas.present? %>
     <h2 class="text-2xl font-bold mt-6 mb-4">キャンセル</h2>
     <% @canceled_bango_hudas.each do |huda| %>
-      <div class="bg-gray-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %></div>
+      <div class="bg-gray-100 p-3 rounded-lg shadow mb-2"><%= huda.bango %>番</div>
     <% end %>
   <% end %>
 

@@ -1,7 +1,10 @@
-<div class="px-4 sm:px-6 lg:px-8 py-2">
-  <%= form_with scope: :user, url: "/admin/user", method: :put, local: true do |form| %>
-    <%= form.label :store_name, 'Store Name', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.text_field :store_name, class: "block w-full text-gray-700 border rounded py-2 px-3 mb-2 leading-tight focus:outline-none focus:shadow-outline" , value: @current_user.store_name%>
-    <%= form.submit "生成", class: "cursor-pointer bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 text-sm sm:text-base" %>
-  <% end %>
+<div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center w-full">
+  <div class="flex flex-col items-center w-full max-w-md mx-auto px-4"> <!-- max-w-mdを追加して、中央に集める -->
+    <%= form_with scope: :user, url: "/admin/user", method: :put, local: true do |form| %>
+      <%= form.label :store_name, 'Store Name', class: "text-gray-700 text-sm font-bold mb-2 w-full" %>
+      <%= form.text_field :store_name, class: "text-gray-700 border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline w-full", value: @current_user.store_name %>
+      <%= form.submit "生成", class: "bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 mt-5 w-full cursor-pointer" %>
+      <%= link_to '戻る', user_path, class: "bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-700 mt-5 w-full text-center block" %>
+    <% end %>
+  </div>
 </div>

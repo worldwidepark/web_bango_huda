@@ -1,20 +1,20 @@
-<div>
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-4 bg-green-100 text-green-800 font-medium rounded-lg mb-5" id="notice"><%= notice %></p>
   <% end %>
-  <h1 class="font-bold text-4xl">ログイン前のページ</h1>
-    <div id="g_id_onload"
-    data-client_id="<%= ENV["GOOGLE_CLIENT_ID"] %>"
-    data-login_uri="http://localhost:3000/google_login_api/callback"
-    data-auto_prompt="false">
+  <h1 class="font-bold text-4xl mb-6">ログインしてください。</h1>
+  <div id="g_id_onload"
+       data-client_id="<%= ENV['GOOGLE_CLIENT_ID'] %>"
+       data-login_uri="http://localhost:3000/google_login_api/callback"
+       data-auto_prompt="false">
   </div>
   <div class="g_id_signin"
-    data-type="standard"
-    data-size="large"
-    data-theme="outline"
-    data-text="sign_in_with"
-    data-shape="rectangular"
-    data-logo_alignment="left">
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="sign_in_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
   </div>
 </div>

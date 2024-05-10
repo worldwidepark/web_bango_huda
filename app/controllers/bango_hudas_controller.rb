@@ -2,7 +2,7 @@ class BangoHudasController < ApplicationController
   # todo: login確認
 
   before_action :authenticate_user,  only: [:index]
-  before_action :find_bango_huda, only: [:no_show, :done, :cancel]
+  before_action :find_bango_huda, only: [:no_show, :done, :cancel, :back_to_the_line]
 
   def index
     # adminと一般用を分ける。
@@ -80,6 +80,16 @@ class BangoHudasController < ApplicationController
       redirect_to bango_hudas_path
     else
       flash[:alert] = "失敗：案内済み"
+      redirect_to bango_hudas_path
+    end
+  end
+
+  def back_to_the_line
+    if @bango_huda.update(is_showed: false, is_canceled: false, is_no_show: false)
+      flash[:notice] = "成功：再度待ち行列に戻す"
+      redirect_to bango_hudas_path
+    else
+      flash[:alert] = "失敗：再度待ち行列に戻す"
       redirect_to bango_hudas_path
     end
   end

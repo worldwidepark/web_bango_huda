@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    redirect_to login_url, alert: "Please log in." unless current_user
+    redirect_to root_path, alert: "ログインしてください。" unless current_user
   end
 end

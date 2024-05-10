@@ -95,7 +95,6 @@ class BangoHudasController < ApplicationController
   end
 
   def reset
-    @alive_bango_hudas = current_user.bango_hudas.where(is_showed: false).where(is_canceled: false).where(is_no_show: false).where(is_reseted: false)
     unreseted_bango_hudas = current_user.bango_hudas.where(is_reseted: false)
     if unreseted_bango_hudas.update(is_reseted: true)
       redirect_to bango_hudas_path

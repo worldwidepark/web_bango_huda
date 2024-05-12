@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         patch 'done'
         patch 'cancel'
         patch 'no_show'
+        patch 'back_to_the_line'
       end
       collection do
         patch 'reset'

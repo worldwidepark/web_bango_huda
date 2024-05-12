@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-
   scope '/admin' do
     resources :bango_hudas, only: [:index] do
       member do
@@ -18,6 +16,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, param: :uuid do
+    member do
+      get 'qr_code'
+    end
     resources :bango_hudas, except: [:index],:param => :uuid
   end
 

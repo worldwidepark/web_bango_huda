@@ -19,6 +19,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def qr_code
+    @store_name = current_user.store_name
+    redirect_to user_path, alert: "店名を入力してください" if @store_name.blank?
+    qrcode = RQRCode::QRCode.new("#{ENV["URL"]}/users/#{current_user.uuid}/bango_hudas/new")
+    @svg = qrcode.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 10,
+      standalone: true,
+      use_path: true
+    ).html_safe
+  end
+
   private
 
   def user_params

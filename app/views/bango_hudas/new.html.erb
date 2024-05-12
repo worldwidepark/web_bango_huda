@@ -2,9 +2,9 @@
   <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
     <h1 class="text-2xl font-bold mb-6 text-center">WebBangoHuda</h1>
     <p class="text-gray-700 mb-4 text-center"><%= @store_name %></p>
-    <p class="text-gray-700 mb-8 text-center">待ってる人: <%= @waiting_people_count %></p>
+    <p class="text-gray-700 mb-8 text-center">待機：<%= @waiting_people_count %>組</p>
     <%= form_with url: "/users/#{params[:user_uuid]}/bango_hudas", method: :post do |form| %>
-      <%= form.submit "生成", class: "bg-blue-500 text-white w-full py-3 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" %>
+      <%= form.submit "生成", class: "bg-blue-500 text-white w-full py-3 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 cursor-pointer" %>
     <% end %>
   </div>
 </div>

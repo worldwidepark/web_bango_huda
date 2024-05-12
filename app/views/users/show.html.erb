@@ -4,6 +4,7 @@
     <div class="flex gap-4">
       <%= button_to '番号札管理', bango_hudas_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= button_to 'ユーザー情報修正', edit_user_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      <%= button_to 'QRコード', qr_code_user_path(@current_user.uuid), method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= button_to '番号札を作る', new_user_bango_huda_path(@current_user.uuid), method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= button_to 'ログアウト', logout_path, method: :delete, class: 'bg-white font-bold py-2 px-4 rounded shadow' %>
     </div>

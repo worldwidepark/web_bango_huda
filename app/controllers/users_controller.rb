@@ -11,6 +11,10 @@ class UsersController < ApplicationController
 
   def update
     @current_user = current_user
+    if user_params[:store_name].blank?
+      redirect_to edit_user_path, alert: "店名を入力してください"
+      return
+    end
 
     if @current_user.update(user_params)
       redirect_to user_path, notice: '成功: User情報アップデート'

@@ -1,6 +1,7 @@
 class BangoHudasController < ApplicationController
   # todo: login確認
-
+  before_action :check_session_availability, only: [:create, :index]
+  before_action :set_count_bangohuda_created, only: [:create]
   before_action :authenticate_user,  only: [:index]
   before_action :find_bango_huda, only: [:no_show, :done, :cancel, :back_to_the_line]
 
@@ -31,6 +32,17 @@ class BangoHudasController < ApplicationController
   end
 
   def create
+    # session_availableがfalseの場合は、セッションが有効ではないので、sessionを使わない
+    # 1日10回以上の作成はできない
+    if @session_available
+      if @count_bangohuda_created >= 10
+        flash[:alert] = "これ以上番号札の設定はできません。"
+        redirect_to new_user_bango_huda_path
+        return
+      else
+        increment_bangohuda_count
+      end
+    end
     current_user = User.find_by(uuid: params[:user_uuid])
     new_bango_huda = current_user.bango_hudas.new(bango: set_bango(current_user))
     if new_bango_huda.save
@@ -39,7 +51,7 @@ class BangoHudasController < ApplicationController
     else
       # 店の名前入れてあげると新設かも
       # ~店のstaffまで問い合わせしてください。みたいな
-      flash.now[:alert] = "番号札作成に失敗しました。"
+      flash[:alert] = "番号札作成に失敗しました。"
       render new_user_bango_huda_path
     end
   end
@@ -115,6 +127,19 @@ class BangoHudasController < ApplicationController
     unless @bango_huda
       flash[:alert] = "失敗：指定した番号札にエラーが発生しました。"
       redirect_to bango_hudas_path
+    end
+  end
+
+  def set_count_bangohuda_created
+    if @session_available
+      session[:count_bangohuda_created] ||= 0
+      @count_bangohuda_created = session[:count_bangohuda_created]
+    end
+  end
+
+  def increment_bangohuda_count
+    if @session_available
+      session[:count_bangohuda_created] += 1
     end
   end
 end

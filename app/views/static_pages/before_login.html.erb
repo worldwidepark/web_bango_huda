@@ -4,7 +4,7 @@
   <h1 class="font-bold text-4xl mb-6">ログインしてください。</h1>
   <div id="g_id_onload"
        data-client_id="<%= ENV['GOOGLE_CLIENT_ID'] %>"
-       data-login_uri="http://localhost:3000/google_login_api/callback"
+       data-login_uri="<%= "#{ENV['URL']}/google_login_api/callback" %>"
        data-auto_prompt="false">
   </div>
   <div class="g_id_signin"

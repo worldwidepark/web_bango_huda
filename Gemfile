@@ -66,9 +66,9 @@ group :development do
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
-  group :production do
-    gem 'pg','0.20.0'
-  end
+group :production do
+  gem 'pg', '~> 1.1'
+end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]

@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
   <div class="w-full flex flex-col items-center">
     <h1 class="text-xl font-semibold mb-4"><%= @current_user.store_name %></h1>
-    <div class="flex gap-4">
+    <div class="flex flex-wrap gap-4 justify-center md:flex-nowrap">
       <%= button_to '番号札管理', bango_hudas_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= button_to 'ユーザー情報修正', edit_user_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       <%= button_to 'QRコード', qr_code_user_path(@current_user.uuid), method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
